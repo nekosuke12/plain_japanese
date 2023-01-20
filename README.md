@@ -1,92 +1,111 @@
-# Bachlorarbeit
+# :label: Plain and gentle language for more comfortable co-existence: Plain Japanese Standard
+This project is conducted as a part of Bachelorarbeit in the winter semester 2022/2023.
 
+[[_TOC_]]
 
+## :pushpin: About the project
+The aim of this project is to conduct classification and translation experiments on Japanese Simplified Corpus. TODO
 
-## Getting started
+## :runner: Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+### Prerequisites
+TODO requirements
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+### Fine-tuned models
+TODO (google drive?)
 
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## :open_file_folder: Directory structure
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.cl.uni-heidelberg.de/udaka/bachlorarbeit.git
-git branch -M master
-git push -uf origin master
+|--dataset_analysis
+|  |--analysis.py
+|  |--criteria.py
+|--classification
+|  |--create_data_classification.py
+|  |--train_classify.py
+|  |--param_tune.py
+|  |--train_param_tune.py
+|  |--resources
+|      |--df_test.csv
+|      |--df_test2.csv
+|      |--df_train.csv
+|      |--df_train2.csv
+|      |--df_valid.csv
+|      |--df_valid2.csv
+|--translation
+|  |--create_data_translate.py
+|  |--train_translate.py
+|  |--evaluate.py
+|  |--resources
+|      |--train_test_valid_dataset
+|      |--sample_generated.txt
+|  |--scores
+|      |--base_scores.csv
+|      |--large_scores.csv
+|      |--summary_scores.ipynb
+|--.gitignore
+|--README.md
+|--index.xml
 ```
 
-## Integrate with your tools
+Some important directories and files are:
 
-- [ ] [Set up project integrations](https://gitlab.cl.uni-heidelberg.de/udaka/bachlorarbeit/-/settings/integrations)
+* `classification`: code of classification experiment.
+* `translation`: code of translation experiment.
+* `resources`: dataset for classification and translation experiments. Both same dataset, but processed differently. (See `create_data_*.py` for further details.) 
+* `README.me`: this file
 
-## Collaborate with your team
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+## :clipboard: Usage
 
-## Test and Deploy
+### Classification
+For fine-tuning or test models:
+* TODO
 
-Use the built-in continuous integration in GitLab.
+For conducting hyperparameter tuning:
+* TODO
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+### Translation
+For fine-tuning or test models:
+* TODO (below is dummy)
 
-***
+For evaluating a specific model that generates rationales with one of the supported metrics, do the following:
+1. activate the neccessary virtual environment for the metric
+2. run `python3 metric_compare.py` with the appropriate parameters
 
-# Editing this README
+For example, to evaluate the "UNIFORM, VisComet text inferences" model from the Marasovic dataset with the METEOR metric, use:
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+`python3 metric_compare.py --model text_objects_q_a_to_r --metric METEOR --gen data/marasovic_text.csv --vcr data/val_np.jsonl`
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+Some notes on the various parameters:
+* `--metric`: This specifies the metric to use to score the rationales. Supported metrics are: `bleu` for BLEU, `meteor` for METEOR, `bertscore` for BERTScore, 
 
-## Name
-Choose a self-explaining name for your project.
+:name_badge: Author
+- Maya Udaka
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+udaka@cl.uni-heidelberg.de
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## :link: References
+### Dataset
+- [言語商会: SNOW T15:やさしい日本語コーパス](https://www.jnlp.org/GengoHouse/snow/t15)
+- [huggingface: Datasets: snow_simplified_japanese_corpus](https://huggingface.co/datasets/snow_simplified_japanese_corpus)
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+### Models
+#### classification
+- [BERT base Japanese model](https://huggingface.co/cl-tohoku/bert-base-japanese)
+- [RoBERTa base Japanese model](https://huggingface.co/ku-nlp/roberta-base-japanese-char-wwm)
+- [LUKE base Japanese model](https://huggingface.co/studio-ousia/luke-japanese-base-lite)
+#### translation
+- [BART base Japanese model](https://huggingface.co/Formzu/bart-base-japanese)
+- [BART large Japanese model](https://huggingface.co/Formzu/bart-large-japanese)
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+### Metrics 
+- [BLEU](https://huggingface.co/spaces/evaluate-metric/bleu)
+- [BERTscore](https://huggingface.co/spaces/evaluate-metric/bertscore)
+- [SARI](https://huggingface.co/spaces/evaluate-metric/sari)
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+### Others
+- [huggingface: classification demo](https://github.com/huggingface/notebooks/blob/6ca682955173cc9d36ffa431ddda505a048cbe80/examples/text_classification.ipynb)
+- [huggingface: translation demo](https://github.com/huggingface/notebooks/blob/main/examples/translation.ipynb)
+- [mecab-python3](https://github.com/SamuraiT/mecab-python3)

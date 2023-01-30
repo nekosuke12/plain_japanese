@@ -4,6 +4,7 @@ import pandas as pd
 from datasets import Dataset, DatasetDict, Value, ClassLabel, Features
 from ray.dashboard import *
 import train_param_tune
+import argparse
 
 # load the dataset in resources
 def create_dataset():
@@ -38,7 +39,11 @@ def create_dataset():
 
 
 if __name__ == "__main__":
-    # TODO argparse
+    parser = argparse.ArgumentParser(description='Hyperparameter tuning for classification')
+    parser.add_argument('-c', '--checkpoint', help='use checkpoint of your choice', required=True)
+    args = parser.parse_args()
+
     data = create_dataset()
-    model_checkpoint = 'ku-nlp/roberta-base-japanese-char-wwm'
-    train_param_tune.train(data, model_checkpoint)
+    model_checkpoint = str(args.checkpoint)
+    train_param_tune.train(data, model_checkpoint) 
+    # in commandline, e.g. python param_tune.py --checkpoint ku-nlp/roberta-base-japanese-char-wwm

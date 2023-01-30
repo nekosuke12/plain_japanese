@@ -9,6 +9,7 @@ from datasets import Dataset, DatasetDict, Value, ClassLabel, Features
 from transformers import DataCollatorWithPadding, AutoTokenizer
 from transformers import AutoModelForSequenceClassification, TrainingArguments, Trainer
 from sklearn.metrics import f1_score
+import argparse
 
 
 def create_dataset():
@@ -88,24 +89,33 @@ def compute_metrics(eval_pred):
     return metric.compute(predictions=predictions, references=labels)
 
 if __name__ == '__main__':
+    # parse the arguments
+    parser = argparse.ArgumentParser(description='Fine-tuning a model for classification')
+
+    parser.add_argument('-m', '--mode', help='choose train or test mode', required=True)
+    parser.add_argument('-c', '--checkpoint', help='use checkpoint of your choice', required=True)
+    parser.add_argument('-t', '--tokenizer', help='use tokenizer of your choice, only for test mode', required=False)
+    
+    args = parser.parse_args()
+    model_checkpoint = str(args.checkpoint)
+    tokenizer = str(args.tokenizer)
+
 
     # create the dataset
     data = create_dataset()
     
-    # check the dataset
+    # check the content of dataset
     print(data['train'].features)
     print(data['valid'].features)
     print(data)
 
-    # TODO argparse
-
-    if sys.argv[1] == "train":
-        model_checkpoint = 'cl-tohoku/bert-base-japanese'
+    # in command line, e.g. python train_classify.py --mode train --checkpoint cl-tohoku/bert-base-japanese
+    if args.mode == "train":
         train(data, model_checkpoint)
 
-    if sys.argv[1] == "test":
-        model = AutoModelForSequenceClassification.from_pretrained('models/bert-base', num_labels=2)
-        tokenizer = AutoTokenizer.from_pretrained('cl-tohoku/bert-base-japanese')
+    # in command line, e.g. python train_classify.py --mode test --checkpoint cl-tohoku/bert-base-japanese --tokenizer cl-tohoku/bert-base-japanese
+    if args.mode == "test":
+        model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=2)
 
         trainer = Trainer(
         model=model,

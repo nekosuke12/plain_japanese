@@ -26,11 +26,8 @@ TODO (google drive?)
 |  |--param_tune.py
 |  |--train_param_tune.py
 |  |--resources
-|      |--df_test.csv
 |      |--df_test2.csv
-|      |--df_train.csv
 |      |--df_train2.csv
-|      |--df_valid.csv
 |      |--df_valid2.csv
 |--translation
 |  |--create_data_translate.py
@@ -58,27 +55,39 @@ Some important directories and files are:
 
 ## :clipboard: Usage
 
+Use GPU to run all the scripts, except for the evaluation of generated simplification (`evaluate_simplified.py`). Activate the neccessary virtual environment for the metric.
+
 ### Classification
 For fine-tuning or test models:
-* TODO
+* run `python train_classify.py` with the appropriate parameters
 
+e.g. <br>
+`python train_classify.py --mode train --checkpoint cl-tohoku/bert-base-japanese` to train a bert base model.<br>
+
+`python train_classify.py --mode test --checkpoint cl-tohoku/bert-base-japanese --tokenizer cl-tohoku/bert-base-japanese` to test a bert base model using bert base tokenizer. 
+<br>
+<br>
 For conducting hyperparameter tuning:
-* TODO
+* run `python param_tune.py` with the appropriate parameters
+
+e.g. `python param_tune.py --checkpoint ku-nlp/roberta-base-japanese-char-wwm` to do hyperparameter tuning on a roberta base model.
 
 ### Translation
 For fine-tuning or test models:
-* TODO (below is dummy)
+* run `python train_translate.py` with the appropriate parameters
 
-For evaluating a specific model that generates rationales with one of the supported metrics, do the following:
-1. activate the neccessary virtual environment for the metric
-2. run `python3 metric_compare.py` with the appropriate parameters
+e.g. <br>
+`python train_translate.py --checkpoint Formzu/bart-base-japanese --output models/translate_base` to train a bart base model and output the model in models/translate_base. <br>
 
-For example, to evaluate the "UNIFORM, VisComet text inferences" model from the Marasovic dataset with the METEOR metric, use:
+e.g. `python test_translate.py --checkpoint Formzu/bart-base-japanese --tokenizer Formzu/bart-large-japanese --output simplified/bart_base.txt` to test a bart base  model and output the generated test in simplified/bart_base.txt.
 
-`python3 metric_compare.py --model text_objects_q_a_to_r --metric METEOR --gen data/marasovic_text.csv --vcr data/val_np.jsonl`
+<br>
+<br>
+For evaluating the quality of generated simplification:
+* run `python evaluate_simplified.py` with the appropriate parameters
 
-Some notes on the various parameters:
-* `--metric`: This specifies the metric to use to score the rationales. Supported metrics are: `bleu` for BLEU, `meteor` for METEOR, `bertscore` for BERTScore, 
+e.g. `python evaluate_simplified.py --generated bart_base.txt`  to evaluate bart_base.txt.
+
 
 :name_badge: Author
 - Maya Udaka

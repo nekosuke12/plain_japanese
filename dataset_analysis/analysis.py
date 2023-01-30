@@ -27,9 +27,6 @@ def evaluate(text, nlp):
 if __name__ == '__main__':
     nlp = spacy.load("ja_ginza")
 
-    # TODO argparse
-
-
     if not sys.argv[1].endswith(".txt") and len(sys.argv[1]) > 1:
         input_text = sys.argv[1].replace("。", "") # TODO remove punctuation
 
@@ -42,7 +39,6 @@ if __name__ == '__main__':
             print("Result is ", (evaluate(input_text, nlp)))
 
     elif sys.argv[1].endswith(".txt"): # when a .txt is loaded
-        # TODO
         name = sys.argv[1].replace("resources/","").replace(".txt", "")
         header = ["diff_words", "loan_words", "teineigo", "doubleneg", "causative", "bunsetsu", "beats", "kanjis"]
 
@@ -52,8 +48,6 @@ if __name__ == '__main__':
 
             for line in textfile:
                 writer.writerow(evaluate(line, nlp))
-                 #myfile.writelines(str(evaluate(line, nlp, False)))
-                 #myfile.writelines("\n")
 
 
     else:

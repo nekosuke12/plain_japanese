@@ -109,7 +109,7 @@ def check_beats(doc):
     for sent in doc.sents:
         for token in sent:
             text_in_hiragana.append(token.morph.get("Reading"))
-    #print(' '.join(text_in_hiragana))
+
     text_in_hiragana = ''.join([''.join(x) for x in text_in_hiragana]) # convert from list of lists to list and then to a string
     
     return len(text_in_hiragana)
@@ -131,10 +131,7 @@ def check_kanjis(doc):
     kanji_total = 0
 
     for token in doc:
-        #print(token.text)
         for letter in token.text:
-            #print(letter)
             if not (is_hiragana(letter) or is_katakana(letter)): # i.e. kanji
-            #if is_katakana(letter): # i.e. kanji
                 kanji_total += 1
     return kanji_total

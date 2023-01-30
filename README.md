@@ -89,7 +89,7 @@ For evaluating the quality of generated simplification:
 e.g. `python evaluate_simplified.py --generated bart_base.txt`  to evaluate bart_base.txt.
 
 
-:name_badge: Author
+## :name_badge: Author
 - Maya Udaka
 
 udaka@cl.uni-heidelberg.de

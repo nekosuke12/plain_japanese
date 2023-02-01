@@ -18,8 +18,12 @@ TODO (google drive?)
 
 ```
 |--dataset_analysis
-|  |--analysis.py
 |  |--criteria.py
+|  |--create_vocab.py
+|  |--data_analysis.py
+|  |--data_analysis.ipynb
+|  |--resources
+|  |--analysed
 |--classification
 |  |--create_data_classification.py
 |  |--train_classify.py
@@ -47,8 +51,9 @@ TODO (google drive?)
 
 Some important directories and files are:
 
-* `classification`: code of classification experiment.
-* `translation`: code of translation experiment.
+* `analysis`: code of dataset analysis and results.
+* `classification`: code of classification experiment and results.
+* `translation`: code of translation experiment and results.
 * `resources`: dataset for classification and translation experiments. Both same dataset, but processed differently. (See `create_data_*.py` for further details.) 
 * `README.me`: this file
 
@@ -79,7 +84,7 @@ For fine-tuning or test models:
 e.g. <br>
 `python train_translate.py --checkpoint Formzu/bart-base-japanese --output models/translate_base` to train a bart base model and output the model in models/translate_base. <br>
 
-e.g. `python test_translate.py --checkpoint Formzu/bart-base-japanese --tokenizer Formzu/bart-large-japanese --output simplified/bart_base.txt` to test a bart base  model and output the generated test in simplified/bart_base.txt.
+`python test_translate.py --checkpoint Formzu/bart-base-japanese --tokenizer Formzu/bart-large-japanese --output simplified/bart_base.txt` to test a bart base  model and output the generated test in simplified/bart_base.txt.
 
 <br>
 <br>

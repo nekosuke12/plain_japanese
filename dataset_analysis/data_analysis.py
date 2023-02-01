@@ -1,11 +1,12 @@
-import sys
+# Due to the error currently occurring during the installation of sudachidict_core, the script may not run properly
+
 import spacy
 import pandas as pd
 import criteria
 import csv
+import argparse
 
 def evaluate(text, nlp):
-    # TODO
     # Duplikate z.B. で muss als Ausnahme　
     doc = nlp(text)
 
@@ -27,8 +28,17 @@ def evaluate(text, nlp):
 if __name__ == '__main__':
     nlp = spacy.load("ja_ginza")
 
-    if not sys.argv[1].endswith(".txt") and len(sys.argv[1]) > 1:
-        input_text = sys.argv[1].replace("。", "") # TODO remove punctuation
+    parser = argparse.ArgumentParser(description='Analyse a dataset')
+
+    parser.add_argument('-i', '--input', help='input', required=True) # e.g. resources/test_original.txt, resources/test_simplfiied.txt
+    parser.add_argument('-o', '--output', help='output path', required=True) # e.g. test_original_analysed.csv, test_dimplified_analysed
+    
+    args = parser.parse_args()
+    input = str(args.input)
+    output_path = str(args.output)
+
+    if not input.endswith(".txt") and len(input) > 1:
+        input_text = input.replace("。", "")
 
         if input_text.count("。") >= 2: # if there are multiple sentences in the input
             splited_text = input_text.split("。")
@@ -38,11 +48,10 @@ if __name__ == '__main__':
         else: # if there is only one sentence in the input
             print("Result is ", (evaluate(input_text, nlp)))
 
-    elif sys.argv[1].endswith(".txt"): # when a .txt is loaded
-        name = sys.argv[1].replace("resources/","").replace(".txt", "")
+    elif input.endswith(".txt"): # when a .txt is loaded
         header = ["diff_words", "loan_words", "teineigo", "doubleneg", "causative", "bunsetsu", "beats", "kanjis"]
 
-        with open(sys.argv[1], "r") as textfile, open('analysis/%s_analysis.csv'%name, 'w') as myfile:
+        with open(input, "r") as textfile, open(output_path, 'w') as myfile:
             writer=csv.writer(myfile, delimiter='\t', lineterminator='\n')
             writer.writerow(header)
 

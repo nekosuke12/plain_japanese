@@ -2,7 +2,6 @@ from ast import Pass
 import ginza
 from spacy.matcher import Matcher
 from spacy.matcher import PhraseMatcher
-import re
 import pandas as pd
 import create_vocab
 
@@ -27,7 +26,7 @@ def check_difficult_words(doc, nlp):
         if token.text not in easy_word_list:
             diff_list.append(token.text)
 
-    return len(diff_list)
+    return len(diff_list) / len(doc.text) # returns the percentage of difficult words
 
 
 def check_loan_words(doc, nlp):
@@ -78,10 +77,13 @@ def check_doubleneg(doc, nlp):
 
     matched = phrase_matcher(doc)
 
-    return len(matched)
+    if len(matched) != 0:
+        return 1 # contains doubleneg
+    else:
+        return 0
 
 def check_causative(doc, nlp):
-
+    # check if a sentence contains causative
     causative = ['させる', 'せる']
 
     matcher = Matcher(nlp.vocab)
@@ -134,4 +136,4 @@ def check_kanjis(doc):
         for letter in token.text:
             if not (is_hiragana(letter) or is_katakana(letter)): # i.e. kanji
                 kanji_total += 1
-    return kanji_total
+    return kanji_total / len(doc.text) 

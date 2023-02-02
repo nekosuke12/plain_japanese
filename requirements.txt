@@ -62,6 +62,7 @@ fonttools=4.25.0=pyhd3eb1b0_0
 freetype=2.12.1=h4a9f257_0
 frozenlist=1.3.3=py310h5eee18b_0
 fsspec=2022.11.0=py310h06a4308_0
+fugashi=1.2.1=pypi_0
 future=0.18.2=py310h06a4308_1
 gflags=2.2.2=he6710b0_0
 giflib=5.2.1=h5eee18b_1
@@ -78,6 +79,7 @@ idna=3.4=py310h06a4308_0
 importlib-metadata=4.11.3=py310h06a4308_0
 importlib_metadata=4.11.3=hd3eb1b0_0
 intel-openmp=2021.4.0=h06a4308_3561
+ipadic=1.0.0=pypi_0
 ipykernel=6.19.2=py310h2f386ee_0
 ipython=8.8.0=py310h06a4308_0
 jedi=0.18.1=py310h06a4308_1

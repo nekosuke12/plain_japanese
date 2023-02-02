@@ -7,7 +7,7 @@ import argparse
 
 
 if __name__ == '__main__':
-    # in command line, e.g. python test_translate.py --checkpoint Formzu/bart-large-japanese --tokenizer Formzu/bart-large-japanese --output simplified/bart_base.txt
+    # in command line, e.g. python test_translate.py --checkpoint /home/students/udaka/bachelorarbeit/translation/models/bart_base --tokenizer Formzu/bart-large-japanese --output bart_base.txt
     # parse the arguments
     parser = argparse.ArgumentParser(description='Test a model for translation')
 

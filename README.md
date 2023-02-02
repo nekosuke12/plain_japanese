@@ -9,10 +9,15 @@ The aim of this project is to conduct classification and translation experiments
 ## :runner: Getting started
 
 ### Prerequisites
-TODO requirements
+
+For this project, Python 3.10.9 is used.
+Use requirements.txt to install necessary libraries. e.g. run `pip install -r requirements.txt`
 
 ### Fine-tuned models
-TODO (google drive?)
+A fine-tuned model is available for each task. [Fine-tuned Models](https://heibox.uni-heidelberg.de/d/7da9aeaeaaac4d988123/)
+
+* fine-tuned roberta base model for classification: roberta_base.zip
+* fine-tuned bart base model for translation: bart_base.zip :warning: this data is very large (1GB)
 
 ## :open_file_folder: Directory structure
 
@@ -67,9 +72,9 @@ For fine-tuning or test models:
 * run `python train_classify.py` with the appropriate parameters
 
 e.g. <br>
-`python train_classify.py --mode train --checkpoint cl-tohoku/bert-base-japanese` to train a bert base model.<br>
+`python train_classify.py --mode train --checkpoint ku-nlp/roberta-base-japanese-char-wwm --output models/roberta_base` to train a roberta base model and save the model in `models/roberta_base`.<br>
 
-`python train_classify.py --mode test --checkpoint cl-tohoku/bert-base-japanese --tokenizer cl-tohoku/bert-base-japanese` to test a bert base model using bert base tokenizer. 
+`python train_classify.py --mode test --checkpoint /home/students/udaka/bachelorarbeit/classification/models/roberta_base --tokenizer ku-nlp/roberta-base-japanese-char-wwm` to test a fine-tuned roberta base model using bert base tokenizer. (replace checkpoint path with the path in which you save fine-tuned models. See Fine-tuned models section for available fine-tuned models)
 <br>
 <br>
 For conducting hyperparameter tuning:
@@ -82,9 +87,9 @@ For fine-tuning or test models:
 * run `python train_translate.py` with the appropriate parameters
 
 e.g. <br>
-`python train_translate.py --checkpoint Formzu/bart-base-japanese --output models/translate_base` to train a bart base model and output the model in models/translate_base. <br>
+`python train_translate.py --checkpoint Formzu/bart-base-japanese --output models/bart_base` to train a bart base model and save the model in `models/bart_base`. <br>
 
-`python test_translate.py --checkpoint Formzu/bart-base-japanese --tokenizer Formzu/bart-large-japanese --output simplified/bart_base.txt` to test a bart base  model and output the generated test in simplified/bart_base.txt.
+`python test_translate.py --checkpoint /home/students/udaka/bachelorarbeit/translation/models/bart_base --tokenizer Formzu/bart-large-japanese --output bart_base.txt` to test a bart base  model and output the generated test in bart_base.txt. (replace checkpoint path with the path in which you save fine-tuned models. See Fine-tuned models section for available fine-tuned models)
 
 <br>
 <br>

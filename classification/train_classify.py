@@ -14,7 +14,7 @@ import argparse
 
 def create_dataset():
     # load dataset created using create_data_classification.py
-    df_train = pd.read_csv('resources/df_test2.csv', sep='\t', header=0) # # change path to save 
+    df_train = pd.read_csv('resources/df_train2.csv', sep='\t', header=0) # # change path to save 
     df_valid = pd.read_csv('resources/df_valid2.csv', sep='\t', header=0) 
     df_test = pd.read_csv('resources/df_test2.csv', sep='\t', header=0)
 
@@ -37,11 +37,9 @@ def create_dataset():
     # remove index col (seems to be coming in from pandas for some reason)
     data = data.remove_columns(["Unnamed: 0"])
 
-    data['test'] = data['test'].filter(lambda example: example['label'] == 0) # to be removed 
-
     return data
 
-def train(data, model_checkpoint):
+def train(data, model_checkpoint, output_path):
     batch_size = 16
     learning_rate = 2e-5
     num_epochs = 100
@@ -62,7 +60,7 @@ def train(data, model_checkpoint):
     model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=2)
 
     training_args = TrainingArguments(
-        output_dir="./results",
+        output_dir="./checkpoints",
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
@@ -80,7 +78,7 @@ def train(data, model_checkpoint):
     )    
 
     trainer.train()
-    trainer.save_model('./models/bert-base') # TODO
+    trainer.save_model(output_path)
 
 def compute_metrics(eval_pred):
     metric = evaluate.load("accuracy")
@@ -95,10 +93,12 @@ if __name__ == '__main__':
     parser.add_argument('-m', '--mode', help='choose train or test mode', required=True)
     parser.add_argument('-c', '--checkpoint', help='use checkpoint of your choice', required=True)
     parser.add_argument('-t', '--tokenizer', help='use tokenizer of your choice, only for test mode', required=False)
+    parser.add_argument('-o', '--output', help='trained model output path', required=False)
     
     args = parser.parse_args()
     model_checkpoint = str(args.checkpoint)
     tokenizer = str(args.tokenizer)
+    output_path = str(args.output)
 
 
     # create the dataset
@@ -109,13 +109,14 @@ if __name__ == '__main__':
     print(data['valid'].features)
     print(data)
 
-    # in command line, e.g. python train_classify.py --mode train --checkpoint cl-tohoku/bert-base-japanese
+    # in command line, e.g. python train_classify.py --mode train --checkpoint ku-nlp/roberta-base-japanese-char-wwm --output models/roberta_base
     if args.mode == "train":
-        train(data, model_checkpoint)
+        train(data, model_checkpoint, output_path)
 
-    # in command line, e.g. python train_classify.py --mode test --checkpoint cl-tohoku/bert-base-japanese --tokenizer cl-tohoku/bert-base-japanese
+    # in command line, e.g. python train_classify.py --mode test --checkpoint /home/students/udaka/bachelorarbeit/classification/models/roberta_base --tokenizer ku-nlp/roberta-base-japanese-char-wwm
     if args.mode == "test":
         model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=2)
+        tokenizer = AutoTokenizer.from_pretrained(tokenizer)
 
         trainer = Trainer(
         model=model,

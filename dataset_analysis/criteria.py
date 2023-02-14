@@ -106,7 +106,7 @@ def check_bunsetsu(doc):
     return num_span
 
 
-def check_beats(doc):
+def check_beats(doc): # mora
     text_in_hiragana = []
     for sent in doc.sents:
         for token in sent:

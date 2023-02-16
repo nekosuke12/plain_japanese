@@ -1,3 +1,11 @@
+"""
+@project: Plain Japanese
+@author:  Maya Udaka
+udaka@cl.uni-heidelberg.de
+@filename: test_translate.py
+@description: script to test models for translation
+"""
+
 from transformers import pipeline
 from transformers import AutoTokenizer
 from transformers import AutoTokenizer

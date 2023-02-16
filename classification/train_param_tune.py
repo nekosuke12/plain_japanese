@@ -1,3 +1,11 @@
+"""
+@project: Plain Japanese
+@author:  Maya Udaka
+udaka@cl.uni-heidelberg.de
+@filename: train_param_tune.py
+@description: script of the train function for hyperparameter tuning
+"""
+
 from transformers import DataCollatorWithPadding, AutoTokenizer
 from transformers import AutoModelForSequenceClassification, TrainingArguments, Trainer
 from datasets import load_metric

@@ -1,3 +1,11 @@
+"""
+@project: Plain Japanese
+@author:  Maya Udaka
+udaka@cl.uni-heidelberg.de
+@filename: create_vocab.py
+@description: script to create a plain language vocabulary consisting of easy words
+"""
+
 import pandas as pd
 
 

@@ -1,3 +1,11 @@
+"""
+@project: Plain Japanese
+@author:  Maya Udaka
+udaka@cl.uni-heidelberg.de
+@filename: data_analysis.py
+@description: analyse dataset based on each linguistic attribute
+"""
+
 # Due to the error currently occurring during the installation of sudachidict_core, the script may not run properly
 
 import spacy

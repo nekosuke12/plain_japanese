@@ -1,4 +1,10 @@
-# script to train models for classification
+"""
+@project: Plain Japanese
+@author:  Maya Udaka
+udaka@cl.uni-heidelberg.de
+@filename: train_classify.py
+@description: script to trin models for classification
+"""
 # reference: https://github.com/huggingface/notebooks/blob/6ca682955173cc9d36ffa431ddda505a048cbe80/examples/text_classification.ipynb
 
 import pandas as pd

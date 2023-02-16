@@ -1,4 +1,10 @@
-# load the model
+"""
+@project: Plain Japanese
+@author:  Maya Udaka
+udaka@cl.uni-heidelberg.de
+@filename: param_tune.py
+@description: script for hyperparameter tuning
+"""
 
 import pandas as pd
 from datasets import Dataset, DatasetDict, Value, ClassLabel, Features

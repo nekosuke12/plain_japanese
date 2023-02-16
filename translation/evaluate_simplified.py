@@ -1,6 +1,13 @@
+"""
+@project: Plain Japanese
+@author:  Maya Udaka
+udaka@cl.uni-heidelberg.de
+@filename: evaluate_simplified.py
+@description: script to evaluate automatically simplified sentences
+"""
+
 # -*- coding: utf-8 -*-
 
-import sys
 from evaluate import load
 import pandas as pd
 from datasets import load_from_disk

@@ -1,4 +1,11 @@
-# script to train models for translation (simplification)
+"""
+@project: Plain Japanese
+@author:  Maya Udaka
+udaka@cl.uni-heidelberg.de
+@filename: train_translate.py
+@description: script to train models for translation
+"""
+
 # reference: https://github.com/huggingface/notebooks/blob/main/examples/translation.ipynb
 
 from transformers import AutoTokenizer

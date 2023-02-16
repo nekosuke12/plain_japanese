@@ -1,3 +1,11 @@
+"""
+@project: Plain Japanese
+@author:  Maya Udaka
+udaka@cl.uni-heidelberg.de
+@filename: create_data_translate.py
+@description: script to create dataset for translation
+"""
+
 # script to create dataset
 
 from datasets import load_dataset

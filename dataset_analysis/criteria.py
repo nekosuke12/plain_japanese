@@ -1,4 +1,11 @@
-from ast import Pass
+"""
+@project: Plain Japanese
+@author:  Maya Udaka
+udaka@cl.uni-heidelberg.de
+@filename: criteria.py
+@description: script for checking plain language criteria for each linguistic attribute
+"""
+
 import ginza
 from spacy.matcher import Matcher
 from spacy.matcher import PhraseMatcher

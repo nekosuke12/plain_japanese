@@ -1,3 +1,11 @@
+"""
+@project: Plain Japanese
+@author:  Maya Udaka
+udaka@cl.uni-heidelberg.de
+@filename: create_data_classification.py
+@description: script to adjust the original dataset to classification task
+"""
+
 import pandas as pd
 from datasets import load_dataset,DatasetDict
 import numpy as np

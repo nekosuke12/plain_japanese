@@ -1,17 +1,22 @@
 # :label: Plain and gentle language for more comfortable co-existence: Plain Japanese Standard
-This project is conducted as a part of Bachelorarbeit in the winter semester 2022/2023.
+This project is conducted for my bachelor thesis in the winter semester 2022/2023.
 
 [[_TOC_]]
 
 ## :pushpin: About the project
-The aim of this project is to conduct classification and translation experiments on Japanese Simplified Corpus. TODO
+The aim of this project is to conduct classification and translation experiments on Japanese Simplified Corpus **SNOW T15: やさしい日本語コーパス**. <br>
+<br>
+The goal of the two tasks are to answer the questions:
+1. "Can a language model tell the readability of a sentence?", i.e. binary classification of original (0) or simplified (1)
+2. "Can a language model learn to simplify a sentence as a translation between the same language?", i.e. simplification as a form of translation between the same language.
 
 ## :runner: Getting started
 
 ### Prerequisites
 
 For this project, Python 3.10.9 is used.
-Use requirements.txt to install necessary libraries. e.g. run `pip install -r requirements.txt`
+Use requirements.txt to install necessary libraries. e.g. run `pip install -r requirements.txt` <br> 
+(:warning: As `requirements.txt` is created using the conda environment I used locally for this project, it includes a large number of libraries)
 
 ### Fine-tuned models
 A fine-tuned model is available for each task. [Fine-tuned Models](https://heibox.uni-heidelberg.de/d/7da9aeaeaaac4d988123/)
@@ -41,7 +46,8 @@ A fine-tuned model is available for each task. [Fine-tuned Models](https://heibo
 |--translation
 |  |--create_data_translate.py
 |  |--train_translate.py
-|  |--evaluate.py
+|  |--test_translate.py
+|  |--evaluate_simplified.py
 |  |--resources
 |      |--train_test_valid_dataset
 |      |--sample_generated.txt
@@ -56,10 +62,10 @@ A fine-tuned model is available for each task. [Fine-tuned Models](https://heibo
 
 Some important directories and files are:
 
-* `analysis`: code of dataset analysis and results.
-* `classification`: code of classification experiment and results.
-* `translation`: code of translation experiment and results.
-* `resources`: dataset for classification and translation experiments. Both same dataset, but processed differently. (See `create_data_*.py` for further details.) 
+* `analysis`: code of dataset analysis and results (the results themselves are in `analyzed` and `data_analysis_results.ipynb` contains the visualisation).
+* `classification`: code of classification experiment.
+* `translation`: code of translation experiment. `score` contains results.
+* `resources`: dataset for classification and translation experiments. Both same dataset, but processed differently. `df_*2.csv` is named like this because they are datasets that don't contain duplicates. (See `create_data_*.py` for further details.) 
 * `README.me`: this file
 
 

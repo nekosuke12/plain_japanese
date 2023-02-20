@@ -1,8 +1,6 @@
 # :label: Plain and gentle language for more comfortable co-existence: Plain Japanese Standard
 This project is conducted for my bachelor thesis in the winter semester 2022/2023.
 
-[[_TOC_]]
-
 ## :pushpin: About the project
 The aim of this project is to conduct classification and translation experiments on Japanese Simplified Corpus **SNOW T15: やさしい日本語コーパス**. <br>
 <br>
